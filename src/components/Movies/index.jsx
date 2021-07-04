@@ -26,7 +26,7 @@ const Movies = ({ searchItem }) => {
   };
 
   async function fetchMovies(signal) {
-    const lastFetched = localStorage.getItem("T_lastFetched") || 0;
+    const lastFetched = Number(localStorage.getItem("T_lastFetched")) || 0;
     const now = Date.now() / 1000;
     const expiration = 86400;
     const isExpired = now - lastFetched >= expiration;
@@ -53,7 +53,7 @@ const Movies = ({ searchItem }) => {
           config,
           `&language=en-US&sort_by=release_date.desc&year=${new Date().getFullYear()}&page=1`
         ),
-        localStorage.getItem("T_lastImagerl"),
+        localStorage.getItem("T_lastImageUrl"),
       ];
     }
   }
@@ -71,7 +71,7 @@ const Movies = ({ searchItem }) => {
           const imageDomain = `${images.base_url}w500`;
           imageUrl.current = imageDomain;
           localStorage.setItem("T_lastFetched", (Date.now() / 1000).toString());
-          localStorage.setItem("T_lastImagerl", imageDomain);
+          localStorage.setItem("T_lastImageUrl", imageDomain);
         }
         setMovies(movieList.results);
       })();
@@ -89,7 +89,7 @@ const Movies = ({ searchItem }) => {
       movies.filter((movie) => {
         const pattern = new RegExp(searchItem, "i");
         return pattern.test(movie.title);
-      }),
+      }) || [],
     [movies, searchItem]
   );
 
@@ -97,14 +97,16 @@ const Movies = ({ searchItem }) => {
     <>
       <h1 className={styles.heading}>Most Recent Movies</h1>
       {error ? (
-        <h1 className={styles.error}>Error loading movies! Please try again</h1>
+        <h1 role="alert" className={styles.error}>
+          Error loading movies! Please try again
+        </h1>
       ) : loading ? (
         <h1 title="loader" className={styles.loader}>
-          Loading...
+          ...Loading
         </h1>
       ) : (
         <>
-          <dl title="movies-list" className={styles.gridWrapper}>
+          <dl role="list" title="movies-list" className={styles.gridWrapper}>
             {updateMovieModal.length > 0 ? (
               filteredMovies.map(
                 (
@@ -119,7 +121,8 @@ const Movies = ({ searchItem }) => {
                   idx
                 ) => (
                   <dd
-                    data-testid="movie-item"
+                    role="list-item"
+                    title="movie-item"
                     tabIndex="0"
                     onClick={() =>
                       updateMovieModal({

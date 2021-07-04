@@ -1,13 +1,20 @@
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import App from "../components/App";
 
-// Note: running cleanup afterEach is done automatically for you in @testing-library/react@9.0.0 or higher
-// unmount and cleanup DOM after the test is finished.
-afterEach(cleanup);
+describe("renders without crashing", () => {
+  const div = document.createElement("div");
+  render(<App />, div);
 
-it("renders content", () => {
-  const { getByTestId, getByTitle } = render(<App />);
-  expect(getByTestId(/search/i)).toBeVisible;
-  expect(getByTitle(/movies-list/i)).toBeVisible;
+  it("update search value", () => {
+    const searchInput = screen.getByRole("searchbox");
+
+    expect(searchInput).toBeTruthy();
+
+    searchInput.focus();
+    fireEvent.change(searchInput, { target: { value: "a" } });
+    expect(searchInput.value).toBe("a");
+  });
 });
+
+afterAll(() => cleanup());

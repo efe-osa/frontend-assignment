@@ -21,7 +21,9 @@ const Modal = ({
     <section data-testid="movie-modal" className={styles.modalOverlay}>
       <div className={styles.modalWrapper}>
         <div className={styles.modalHeader}>
-          <h1 title="movie-title" className={styles.title}>{title}</h1>
+          <h1 title="movie-title" className={styles.title}>
+            {title}
+          </h1>
           <button
             ref={buttonRef}
             type="button"
@@ -43,7 +45,9 @@ const Modal = ({
               <span className={styles.subtitle}>Release date: </span>
               {releaseDate}
             </h2>
-            <p title="overview" className={styles["mt-1"]}>{overview}</p>
+            <p title="overview" className={styles["mt-1"]}>
+              {overview}
+            </p>
             <h3 title="rating" className={styles["mt-1"]}>
               <span className={styles.subtitle}>{rating}</span>
               /10 ({votes} total votes)
