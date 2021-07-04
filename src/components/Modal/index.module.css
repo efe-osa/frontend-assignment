@@ -1,0 +1,75 @@
+.modalOverlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:14px;
+}
+.modalWrapper {
+  width: 583px;
+  min-height: 474px;
+  padding: 20px 27px 28px 27px;
+  background-color: white;
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.modalBody {
+  margin-top: 16px;
+  display: grid;
+  column-gap: 22px;
+  grid-template-rows: 266px 241px;
+  grid-template-columns: auto;
+}
+@media screen and (min-width: 1024px) {
+  .modalBody {
+    grid-template-columns: minmax(266px, 350px) 1fr;
+    grid-template-rows: auto;
+    row-gap: 22px;
+  }
+}
+.modalBody {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 266px 241px;
+  grid-template-rows: auto;
+  column-gap: 22px;
+}
+.movieImg {
+  min-height: 389px;
+  background-color: lightgrey;
+}
+.movieImg,
+.button img {
+  width: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+.button {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+}
+.button img {
+  height: 100%;
+}
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+}
+.subtitle {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+}
+.mt-1{
+  margin-top: 16px;
+}
